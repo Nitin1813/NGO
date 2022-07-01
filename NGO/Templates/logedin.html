@@ -1,0 +1,85 @@
+{% extends "layout.html" %} {% block content %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.submit').disabled = true;
+        document.querySelector('.confirm_password').onkeyup = () => {
+
+
+            if (document.querySelector('.confirm_password').value.length > 0) {
+                if (document.querySelector('.confirm_password').value == document.querySelector('.new_password').value) {
+                    document.querySelector('.submit').disabled = false;
+                } else {
+                    document.querySelector('.submit').disabled = true;
+                }
+            } else {
+                document.querySelector('.submit').disabled = true;
+            }
+        }
+        document.querySelector('.new_password').onkeyup = () => {
+
+
+            if (document.querySelector('.confirm_password').value.length > 0) {
+                if (document.querySelector('.confirm_password').value == document.querySelector('.new_password').value) {
+                    document.querySelector('.submit').disabled = false;
+                } else {
+                    document.querySelector('.submit').disabled = true;
+                }
+            } else {
+                document.querySelector('.submit').disabled = true;
+            }
+        }
+    })
+</script>
+<div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tag }}" {% endif %}>{{ message}}</li>{% endfor %}
+
+    </ul>{% endif %}
+    <div class="formate">
+        <ul>
+            <li> First Name</li>
+            <li>Lats Name</li>
+            <li>Email</li>
+            <li>Password</li>
+        </ul>
+    </div>
+
+    <div class="details">
+        <ul>
+            <li>{{user.first_name}}</li>
+            <li>{{user.last_name}}</li>
+            <li>{{user.email}}</li>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" placeholder="username" name="username" value="{{user.username}}" disabled=true>
+                <br><input type="passowrd" placeholder="Currunt Password" name="password">
+                <h6 style="color: red;">Enter Password</h6>
+                <input type="password" placeholder="New Password" name="new_password" class="new_password">
+                <h6 style="color: red;">Enter Password</h6>
+                <input type="password" placeholder="Confirm Passeword" name="confirm_password" class="confirm_password">
+                <h6 style="color: red;">Enter Password</h6>
+                <input type="submit" class="submit">
+            </form>
+
+        </ul>
+    </div>
+</div>
+<style>
+    .formate {
+        width: 30%;
+        padding-left: 30px;
+        padding-right: 30px;
+        float: left;
+    }
+    
+    .details {
+        width: 60%;
+        padding-right: 30px;
+        padding-left: 20px;
+        float: right;
+    }
+</style>
+{% endblock %}

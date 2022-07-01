@@ -1,0 +1,15 @@
+{% extends "layout.html" %} {% block content %} {% load static%}
+
+<h1>
+    <u><center>Donate now</center></u>
+</h1>
+
+<div class="center">
+    <form class="text-center border border-light p-5" action="donate1.html" method="POST">
+        {% csrf_token %} {{form3}}
+        <input type="submit">
+
+    </form>
+</div>
+</div>
+{% endblock %}
